@@ -13,6 +13,11 @@ def test_data():
     return cat_1, cat_2, prod_1, prod_2, prod_3
 
 
+def test_counting(test_data):
+    assert Category.total_category == 2
+    assert Category.total_products == 3
+
+
 def test_category_init(test_data):
     assert test_data[0].name == "Самокаты"
     assert test_data[0].description == "средство передвижения"
@@ -23,8 +28,3 @@ def test_product_init(test_data):
     assert test_data[3].description == "автомобиль"
     assert test_data[3].price == 100000
     assert test_data[3].quantity_in_stock == 3
-
-
-def test_counting(test_data):
-    assert Category.total_category == 2
-    assert Category.total_products == 3
