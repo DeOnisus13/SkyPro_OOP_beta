@@ -1,4 +1,7 @@
 class Category:
+    """
+    Класс, представляющий категорию продуктов.
+    """
     total_category = 0
     total_products = 0
 
@@ -10,6 +13,9 @@ class Category:
 
 
 class Product:
+    """
+    Класс, представляющий продукты.
+    """
     def __init__(self, name: str, description: str, price: int | float, quantity_in_stock: int):
         self.name = name
         self.description = description
