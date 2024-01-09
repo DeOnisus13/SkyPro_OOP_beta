@@ -19,12 +19,12 @@ def test_counting(test_data):
 
 
 def test_category_init(test_data):
-    assert test_data[0].name == "Самокаты"
-    assert test_data[0].description == "средство передвижения"
+    assert test_data[0].name_cat == "Самокаты"
+    assert test_data[0].description_cat == "средство передвижения"
 
 
 def test_product_init(test_data):
-    assert test_data[3].name == "Lada Vesta"
-    assert test_data[3].description == "автомобиль"
+    assert test_data[3].name_prod == "Lada Vesta"
+    assert test_data[3].description_prod == "автомобиль"
     assert test_data[3].price == 100000
     assert test_data[3].quantity_in_stock == 3
