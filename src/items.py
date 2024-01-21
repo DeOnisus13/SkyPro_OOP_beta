@@ -31,7 +31,10 @@ class Category:
         """
         Сеттер для добавления продуктов в список.
         """
-        self.__products.append(product)
+        if isinstance(product, Product):
+            self.__products.append(product)
+        else:
+            print("Ошибка добавления")
 
     def __str__(self):
         """
@@ -54,6 +57,7 @@ class Product:
     """
     Класс, представляющий продукты.
     """
+
     def __init__(self, name_prod: str, description_prod: str, price: int | float, quantity_in_stock: int):
         self.name_prod = name_prod
         self.description_prod = description_prod
@@ -101,7 +105,10 @@ class Product:
         """
         Метод для сложения объектов между собой.
         """
-        return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
+        if type(self) is type(other):
+            return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
+        else:
+            return "Товары из разных классов нельзя складывать"
 
 
 class ProductsFromCategory:
@@ -109,8 +116,35 @@ class ProductsFromCategory:
     Класс, принимающий на вход категорию и дающий возможность использовать цикл for для
     прохода по всем товарам данной категории.
     """
+
     def __init__(self, category: Category):
         self.category = category
 
     def __iter__(self):
         return iter(self.category.add_products)
+
+
+class LawnGrass(Product):
+    """
+    Класс для товара - газонная трава
+    """
+
+    def __init__(self, name_prod: str, description_prod: str, price: int | float, quantity_in_stock: int,
+                 country_origin: str, germination_period: str, color: str):
+        super().__init__(name_prod, description_prod, price, quantity_in_stock)
+        self.country_origin = country_origin
+        self.germination_period = germination_period
+        self.color = color
+
+
+class SmartPhone(Product):
+    """
+    Класс для товара - смартфон
+    """
+    def __init__(self, name_prod: str, description_prod: str, price: int | float, quantity_in_stock: int,
+                 performance: str, model: str, memory: str, color: str):
+        super().__init__(name_prod, description_prod, price, quantity_in_stock)
+        self.performance = performance
+        self.model = model
+        self.memory = memory
+        self.color = color
