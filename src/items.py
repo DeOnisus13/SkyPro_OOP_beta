@@ -31,10 +31,9 @@ class Category:
         """
         Сеттер для добавления продуктов в список.
         """
-        if isinstance(product, Product):
-            self.__products.append(product)
-        else:
-            print("Ошибка добавления")
+        if not isinstance(product, Product):
+            raise TypeError("Ошибка добавления")
+        self.__products.append(product)
 
     def __str__(self):
         """
@@ -105,10 +104,13 @@ class Product:
         """
         Метод для сложения объектов между собой.
         """
-        if type(self) is type(other):
-            return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
-        else:
-            return "Товары из разных классов нельзя складывать"
+        # if type(self) is type(other):
+        #     return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
+        # else:
+        #     return "Товары из разных классов нельзя складывать"
+        if not isinstance(other, Product):
+            raise TypeError("Товары из разных классов нельзя складывать")
+        return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
 
 
 class ProductsFromCategory:
