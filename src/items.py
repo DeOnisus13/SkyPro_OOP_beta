@@ -87,7 +87,6 @@ class Product(AbstractProduct, ReportMixin):
         self.__price = price
         self.quantity_in_stock = quantity_in_stock
         Category.total_products += 1
-        # super().__repr__(self)
 
     @property
     def price(self):
@@ -129,13 +128,10 @@ class Product(AbstractProduct, ReportMixin):
         """
         Метод для сложения объектов между собой.
         """
-        # if type(self) is type(other):
-        #     return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
-        # else:
-        #     return "Товары из разных классов нельзя складывать"
-        if not isinstance(other, Product):
+        if type(self) is type(other):
+            return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
+        else:
             raise TypeError("Товары из разных классов нельзя складывать")
-        return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
 
 
 class ProductsFromCategory:
@@ -162,7 +158,6 @@ class LawnGrass(Product):
         self.country_origin = country_origin
         self.germination_period = germination_period
         self.color = color
-        # super().__repr__(self)
 
 
 class SmartPhone(Product):
@@ -176,4 +171,3 @@ class SmartPhone(Product):
         self.model = model
         self.memory = memory
         self.color = color
-        # super().__repr__(self)

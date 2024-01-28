@@ -74,9 +74,9 @@ def main():
     print(f"-" * 40)
 
     # Проверка сложения товаров из разных классов
-    print(prod_2 + grass_1)
-    print(phone_1 + grass_1)
-    print(prod_1 + phone_1)
+    # print(prod_2 + grass_1)
+    # print(phone_1 + grass_1)
+    # print(prod_1 + phone_1)
     print(f"-" * 40)
 
 
