@@ -30,8 +30,6 @@ def main():
     cat_2.add_products = prod_2
     cat_2.add_products = prod_3
     cat_2.add_products = phone_1
-    cat_1.add_products = [1, 2, 3]  # будет ошибка добавления
-    print(f"-" * 40)
 
     # Вывод общего количества категорий и продуктов
     print(Category.total_category)
