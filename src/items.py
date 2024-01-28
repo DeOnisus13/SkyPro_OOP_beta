@@ -75,6 +75,23 @@ class Category:
                 sum_quantity_in_stock += product.quantity_in_stock
         return sum_quantity_in_stock
 
+    def average_price(self):
+        """
+        Функция подсчета средней стоимости товаров в категории
+        """
+        quantity_of_products = 0
+        sum_of_prices = 0
+        for product in self.__products:
+            if product:
+                sum_of_prices += product.price * product.quantity_in_stock
+                quantity_of_products += product.quantity_in_stock
+        try:
+            avg_price = round(sum_of_prices / quantity_of_products, 2)
+        except ZeroDivisionError:
+            avg_price = 0
+
+        return avg_price
+
 
 class Product(AbstractProduct, ReportMixin):
     """
@@ -85,6 +102,8 @@ class Product(AbstractProduct, ReportMixin):
         self.name_prod = name_prod
         self.description_prod = description_prod
         self.__price = price
+        if quantity_in_stock <= 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         self.quantity_in_stock = quantity_in_stock
         Category.total_products += 1
 
