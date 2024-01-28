@@ -19,6 +19,9 @@ def main():
     phone_1 = SmartPhone("Xiaomi Mi 12 T", "смартфон", 4000, 6,
                          "супер мощный", "Mi12T", "8Gb", "black")
 
+    # Добавление продукта с нулевым количеством
+    # prod_4 = Product("Coca-Cola", "газировка", 150, 0)
+
     # Вызов __repr__ у созданных объектов через миксин
     print(repr(prod_3))
     print(repr(grass_1))
@@ -78,6 +81,9 @@ def main():
     # print(phone_1 + grass_1)
     # print(prod_1 + phone_1)
     print(f"-" * 40)
+
+    # Средняя цена товаров в категории
+    print(cat_2.average_price())
 
 
 if __name__ == "__main__":
