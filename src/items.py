@@ -1,4 +1,28 @@
 from typing import Any
+from abc import ABC, abstractmethod
+
+
+class AbstractProduct(ABC):
+    @abstractmethod
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def price(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+
+class ReportMixin:
+    def __repr__(self, *args, **kwargs):
+        return f"Создан объект {self.__class__.__name__} - {self.__dict__}"
 
 
 class Category:
@@ -52,7 +76,7 @@ class Category:
         return sum_quantity_in_stock
 
 
-class Product:
+class Product(AbstractProduct, ReportMixin):
     """
     Класс, представляющий продукты.
     """
@@ -63,6 +87,7 @@ class Product:
         self.__price = price
         self.quantity_in_stock = quantity_in_stock
         Category.total_products += 1
+        # super().__repr__(self)
 
     @property
     def price(self):
@@ -137,6 +162,7 @@ class LawnGrass(Product):
         self.country_origin = country_origin
         self.germination_period = germination_period
         self.color = color
+        # super().__repr__(self)
 
 
 class SmartPhone(Product):
@@ -150,3 +176,4 @@ class SmartPhone(Product):
         self.model = model
         self.memory = memory
         self.color = color
+        # super().__repr__(self)

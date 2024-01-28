@@ -19,12 +19,17 @@ def main():
     phone_1 = SmartPhone("Xiaomi Mi 12 T", "смартфон", 4000, 6,
                          "супер мощный", "Mi12T", "8Gb", "black")
 
+    # Вызов __repr__ у созданных объектов через миксин
+    print(repr(prod_3))
+    print(repr(grass_1))
+    print(repr(phone_1))
+    print(f"-" * 40)
+
     # Добавление продукта в список категории
     cat_1.add_products = prod_1
     cat_2.add_products = prod_2
     cat_2.add_products = prod_3
     cat_2.add_products = phone_1
-    # cat_1.add_products = [1, 2, 3]  # будет ошибка добавления
 
     # Вывод общего количества категорий и продуктов
     print(Category.total_category)
