@@ -1,4 +1,28 @@
 from typing import Any
+from abc import ABC, abstractmethod
+
+
+class AbstractProduct(ABC):
+    @abstractmethod
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def price(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+
+class ReportMixin:
+    def __repr__(self, *args, **kwargs):
+        return f"Создан объект {self.__class__.__name__} - {self.__dict__}"
 
 
 class Category:
@@ -31,6 +55,8 @@ class Category:
         """
         Сеттер для добавления продуктов в список.
         """
+        if not isinstance(product, Product):
+            raise TypeError("Ошибка добавления")
         self.__products.append(product)
 
     def __str__(self):
@@ -50,16 +76,18 @@ class Category:
         return sum_quantity_in_stock
 
 
-class Product:
+class Product(AbstractProduct, ReportMixin):
     """
     Класс, представляющий продукты.
     """
+
     def __init__(self, name_prod: str, description_prod: str, price: int | float, quantity_in_stock: int):
         self.name_prod = name_prod
         self.description_prod = description_prod
         self.__price = price
         self.quantity_in_stock = quantity_in_stock
         Category.total_products += 1
+        # super().__repr__(self)
 
     @property
     def price(self):
@@ -101,6 +129,12 @@ class Product:
         """
         Метод для сложения объектов между собой.
         """
+        # if type(self) is type(other):
+        #     return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
+        # else:
+        #     return "Товары из разных классов нельзя складывать"
+        if not isinstance(other, Product):
+            raise TypeError("Товары из разных классов нельзя складывать")
         return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
 
 
@@ -109,8 +143,37 @@ class ProductsFromCategory:
     Класс, принимающий на вход категорию и дающий возможность использовать цикл for для
     прохода по всем товарам данной категории.
     """
+
     def __init__(self, category: Category):
         self.category = category
 
     def __iter__(self):
         return iter(self.category.add_products)
+
+
+class LawnGrass(Product):
+    """
+    Класс для товара - газонная трава
+    """
+
+    def __init__(self, name_prod: str, description_prod: str, price: int | float, quantity_in_stock: int,
+                 country_origin: str, germination_period: str, color: str):
+        super().__init__(name_prod, description_prod, price, quantity_in_stock)
+        self.country_origin = country_origin
+        self.germination_period = germination_period
+        self.color = color
+        # super().__repr__(self)
+
+
+class SmartPhone(Product):
+    """
+    Класс для товара - смартфон
+    """
+    def __init__(self, name_prod: str, description_prod: str, price: int | float, quantity_in_stock: int,
+                 performance: str, model: str, memory: str, color: str):
+        super().__init__(name_prod, description_prod, price, quantity_in_stock)
+        self.performance = performance
+        self.model = model
+        self.memory = memory
+        self.color = color
+        # super().__repr__(self)
